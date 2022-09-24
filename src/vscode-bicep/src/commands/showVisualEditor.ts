@@ -3,16 +3,17 @@
 import vscode from "vscode";
 import { IActionContext } from "@microsoft/vscode-azext-utils";
 
-import { BicepVisualizerViewManager } from "../visualizer";
+import { BicepVisualEditorViewManager } from "../visualEditor";
 import { Command } from "./types";
 import { findOrCreateActiveBicepFile } from "./findOrCreateActiveBicepFile";
 
 async function showVisualEditor(
   context: IActionContext,
-  viewManager: BicepVisualizerViewManager,
+  viewManager: BicepVisualEditorViewManager,
   documentUri: vscode.Uri | undefined,
   sideBySide = false
 ) {
+  // Opens Tab with options for Bicep files to open and waits for user to choose
   documentUri = await findOrCreateActiveBicepFile(
     context,
     documentUri,
@@ -32,7 +33,7 @@ export class ShowVisualEditorCommand implements Command {
   public readonly id = "bicep.showVisualEditor";
 
   public constructor(
-    private readonly viewManager: BicepVisualizerViewManager
+    private readonly viewManager: BicepVisualEditorViewManager
   ) {}
 
   public async execute(

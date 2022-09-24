@@ -3,6 +3,7 @@
 
 import vscode from "vscode";
 import { BicepVisualizerViewManager } from "./visualizer";
+import { BicepVisualEditorViewManager } from "./visualEditor";
 import { createAzExtOutputChannel } from "./utils/AzExtOutputChannel";
 import { OutputChannelManager } from "./utils/OutputChannelManager";
 import * as lsp from "vscode-languageclient/node";
@@ -97,6 +98,10 @@ export async function activate(
           )
         );
 
+        const editorViewManager = extension.register(
+          new BicepVisualEditorViewManager(extension.extensionUri, languageClient)
+        );
+
         const viewManager = extension.register(
           new BicepVisualizerViewManager(extension.extensionUri, languageClient)
         );
@@ -126,7 +131,7 @@ export async function activate(
               outputChannelManager
             ),
             new InsertResourceCommand(languageClient),
-            new ShowVisualEditorCommand(viewManager),
+            new ShowVisualEditorCommand(editorViewManager),
             new ShowVisualizerCommand(viewManager),
             new ShowVisualizerToSideCommand(viewManager),
             new ShowSourceCommand(viewManager),

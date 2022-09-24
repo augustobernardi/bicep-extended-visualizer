@@ -50,6 +50,7 @@
     "onCommand:bicep.gettingStarted.copyToClipboard",
     "onCommand:bicep.gettingStarted.createBicepFile",
     "onCommand:bicep.gettingStarted.openBicepFile",
+    "onWebviewPanel:bicep.visualEditor",
     "onWebviewPanel:bicep.visualizer"
   ],
   "main": "./out/extension",
